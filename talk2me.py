@@ -3,11 +3,12 @@ from discord import app_commands
 from discord.ext import commands
 import google.generativeai as palm
 import os
+import interactions
 
 
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
+client = interactions.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 bot = commands.Bot(command_prefix='', intents=discord.Intents.default())
 
@@ -20,11 +21,11 @@ client_key = os.environ["client_key"]
 
 palm.configure(api_key=api_key)
 
-@tree.command(name = "hello", description = "My first application Command") #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
+@client.command(name = "hello", description = "My first application Command") #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
 async def first_command(interaction):
     await interaction.response.send_message(f"Hello! {interaction.user.mention}")
 
-@tree.command(name = "test", description = "My second application Command") #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
+@client.command(name = "test", description = "My second application Command") #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
 async def second_command(interaction):
     await interaction.response.send_message("testing...")
 
