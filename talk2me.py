@@ -22,6 +22,10 @@ palm.configure(api_key=api_key)
 async def first_command(interaction):
     await interaction.response.send_message(f"Hello! {interaction.user.mention}")
 
+@client.command(name = "test")
+async def second_command(interaction):
+    await interaction.response.send_messahe("testing...")
+
 @client.event
 async def on_message(message):
     if message.author.bot:
